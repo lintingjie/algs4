@@ -1,4 +1,4 @@
-package com.ltj;
+package com.ltj.chapter3.symbolTables;
 
 import edu.princeton.cs.algs4.ST;
 import edu.princeton.cs.algs4.StdIn;
