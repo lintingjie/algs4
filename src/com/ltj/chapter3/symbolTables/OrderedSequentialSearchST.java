@@ -178,39 +178,58 @@ public class OrderedSequentialSearchST<K extends Comparable<K>, V> {
 
     /**
      * 小于key的键的数量
+     *
      * @param key
      * @return
      */
     public int rank(K key) {
         if (first == null) return 0;
-        int i=0;
-        for (Node x = first; x !=null && key.compareTo(x.key)>0 ; x=x.next) {
+        int i = 0;
+        for (Node x = first; x != null && key.compareTo(x.key) > 0; x = x.next) {
             i++;
         }
         return i;
     }
 
+    public K select(int i) {
+        if (first == null || i < 0 || i >= n) return null;
+        Node x = first;
+        for (int j = 0; j < i; j++) {
+            x = x.next;
+        }
+        return x.key;
+    }
+
     /**
      * 小于等于key的最大键
+     *
      * @param key
      * @return
      */
-    public K floor(K key){
-        for (Node x = first; x !=null;x=x.next) {
-            if(x.key.compareTo(key)>0){
-                return x.key;
+    public K floor(K key) {
+        if (key == null) return null;
+        K result = null;
+        for (Node x = first; x != null; x = x.next) {
+            if (x.key.compareTo(key) <= 0) {
+                result = x.key;
             }
         }
-        return null;
+        return result;
     }
 
     /**
      * 大于等于key的最小值
+     *
      * @param key
      * @return
      */
-    public K ceiling(K key){
-        //todo
+    public K ceiling(K key) {
+        if (key == null) return null;
+        for (Node x = first; x != null; x = x.next) {
+            if (x.key.compareTo(key) >= 0) {
+                return x.key;
+            }
+        }
         return null;
     }
 
@@ -231,7 +250,7 @@ public class OrderedSequentialSearchST<K extends Comparable<K>, V> {
         st.put("d", 2);
         st.put("e", 2);
         st.put("f", 2);
-        st.delete("a");
+        st.delete("b");
 //        st.deleteMin();
 //        st.deleteMax();
         System.out.println(st.rank("f"));
@@ -241,6 +260,25 @@ public class OrderedSequentialSearchST<K extends Comparable<K>, V> {
         System.out.println("size:" + st.size());
         System.out.println("min key:" + st.min());
         System.out.println("max key:" + st.max());
+        System.out.println("floor A:" + st.floor("A"));
+        System.out.println("floor b:" + st.floor("b"));
+        System.out.println("floor c:" + st.floor("c"));
+        System.out.println("floor f:" + st.floor("f"));
+        System.out.println("floor g:" + st.floor("g"));
+        System.out.println("ceiling A:" + st.ceiling("A"));
+        System.out.println("ceiling b:" + st.ceiling("b"));
+        System.out.println("ceiling c:" + st.ceiling("c"));
+        System.out.println("ceiling f:" + st.ceiling("f"));
+        System.out.println("ceiling g:" + st.ceiling("g"));
+
+        System.out.println("rank a:" + st.rank("a"));
+        System.out.println("rank c:" + st.rank("c"));
+        System.out.println("rank f:" + st.rank("f"));
+        System.out.println("select -1:" + st.select(-1));
+        System.out.println("select 0:" + st.select(0));
+        System.out.println("select 1:" + st.select(1));
+        System.out.println("select 5:" + st.select(5));
+        System.out.println("select 6:" + st.select(6));
         for (String key : st.keys()) {
             System.out.println(key + " " + st.get(key));
         }
