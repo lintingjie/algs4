@@ -4,6 +4,7 @@ package com.ltj.chapter3.symbolTables;/**
  * @date 2019/3/3 0:34
  */
 
+import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.ST;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
@@ -13,7 +14,7 @@ import edu.princeton.cs.algs4.StdOut;
  */
 public class FrequencyCounter {
     public static void main(String[] args) {
-        int minlen = Integer.parseInt(args[0]);
+        int minlen = 20;
         ST<String, Integer> st = new ST<>();
         while (!StdIn.isEmpty()) {
             String word = StdIn.readString();
@@ -25,12 +26,22 @@ public class FrequencyCounter {
             }
         }
         String max = "";
-        st.put(max, 0);
+        int maxVal = 0;
+        st.put(max, maxVal);
+        Queue<String> queue = new Queue<>();
+        queue.enqueue(max);
         for (String word : st.keys()) {
             if (st.get(word) > st.get(max)) {
                 max = word;
+                queue = new Queue<>();
+                queue.enqueue(word);
+            }else if(st.get(word) == st.get(max)){
+                queue.enqueue(word);
             }
         }
-        StdOut.println(max + " " + st.get(max));
+        for(String key : queue){
+            StdOut.println(key + " " + st.get(key));
+        }
+
     }
 }
