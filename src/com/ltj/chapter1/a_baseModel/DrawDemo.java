@@ -1,4 +1,4 @@
-package com.ltj.chapter1.baseModel;
+package com.ltj.chapter1.a_baseModel;
 
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdRandom;
