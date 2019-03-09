@@ -16,6 +16,11 @@ public class Stack<Item> implements Iterable<Item>{
         Node next;
     }
 
+    public Stack() {
+        first = null;
+        N = 0;
+    }
+
     public void push(Item item) {
         //向栈顶添加元素
         Node oldFirst = first;
@@ -31,6 +36,11 @@ public class Stack<Item> implements Iterable<Item>{
         first = first.next;
         N--;
         return item;
+    }
+
+    public Item peek(){
+        if(isEmpty()) return null;
+        return first.item;
     }
 
     public boolean isEmpty() {
