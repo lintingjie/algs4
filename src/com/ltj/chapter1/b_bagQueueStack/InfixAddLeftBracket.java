@@ -30,7 +30,9 @@ public class InfixAddLeftBracket {
                 String val2 = vals.pop();
                 String result = LEFT_PAREN + val2 + ops.pop() + val1 + RIGHT_PAREN;
                 vals.push(result);
-            }else if(s.equals("+")||s.equals("-")||s.equals("*")||s.equals("/")){
+            }else if(s.equals(LEFT_PAREN)){
+                continue;
+            } else if(s.equals("+")||s.equals("-")||s.equals("*")||s.equals("/")){
                 if(!val.equals("")){
                     vals.push(val);
                     val = "";
