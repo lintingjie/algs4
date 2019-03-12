@@ -6,7 +6,7 @@ import java.util.Iterator;
  * Created by ltj on 2019/3/8
  * 下压堆栈（链表实现）
  */
-public class Stack<Item> implements Iterable<Item>{
+public class Stack<Item> implements Iterable<Item> {
 
     private Node first;
     private int N;
@@ -14,11 +14,27 @@ public class Stack<Item> implements Iterable<Item>{
     private class Node {
         Item item;
         Node next;
+
+        Node(){}
+
+        Node(Node x) {
+            this.item = x.item;
+            this.next = x.next;
+        }
     }
 
     public Stack() {
         first = null;
         N = 0;
+    }
+
+    public Stack(Stack t) {
+        if (t.first != null) {
+            first = new Node(t.first);
+            for (Node x = first; x.next != null; x = x.next) {
+                first.next = new Node(x.next);
+            }
+        }
     }
 
     public void push(Item item) {
@@ -38,8 +54,8 @@ public class Stack<Item> implements Iterable<Item>{
         return item;
     }
 
-    public Item peek(){
-        if(isEmpty()) return null;
+    public Item peek() {
+        if (isEmpty()) return null;
         return first.item;
     }
 
@@ -51,22 +67,26 @@ public class Stack<Item> implements Iterable<Item>{
         return N;
     }
 
-    public Iterator<Item> iterator(){
+    public Iterator<Item> iterator() {
 
         return new ListIterator();
     }
+
     private class ListIterator implements Iterator<Item> {
         private Node current = first;
+
         @Override
         public boolean hasNext() {
-            return current!=null;
+            return current != null;
         }
+
         @Override
         public Item next() {
             Item item = current.item;
             current = current.next;
             return item;
         }
+
         @Override
         public void remove() {
         }
@@ -77,7 +97,7 @@ public class Stack<Item> implements Iterable<Item>{
         stack.push("a");
         stack.push("b");
         stack.push("c");
-        for(String s : stack){
+        for (String s : stack) {
             System.out.println(s);
         }
         System.out.println(stack.pop());
